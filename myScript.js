@@ -7,7 +7,8 @@ const updateText = document.getElementById('score-text');
 const bodyImg = document.getElementById('body');
 const seeImg = document.getElementById('choices');
 const removeMenu = document.getElementById('header');
-var computerOption = function() {  // generates computers option
+
+function computerOption() {  // generates computers option
 var computerChoice = Math.random();
 var computerIndex = ["rock", "paper","scissors"];
 if(computerChoice < 0.34) {
@@ -20,6 +21,7 @@ else {
   return computerIndex[2];
 }
 };
+
 const scoreboard = {
   player: 0,
   computer: 0
@@ -35,7 +37,7 @@ function getComputerScore() {
 function play(e){
   restart.style.display = 'inline-block'
   const playerChoice = e.target.id;
-  const computerChoice = "rock";
+  const computerChoice = computerOption() ;
   const winner = compare(playerChoice , computerChoice);
   showWinner(winner, computerChoice);
   textUpdate();
@@ -142,7 +144,7 @@ computerScore = getComputerScore();
 playerScore = getPlayerScore();
 if(computerScore > playerScore) {
   updateText.style.color = 'red';
-  if(computerScore > playerScore + 3){
+  if(computerScore > playerScore + 2){
     seeImage();
     bodyImg.style.backgroundImage = "url('heart.jpg')";
     updateText.innerHTML = `<h1><strong>YOU LOST! \n Reset to Play Again!</strong></h1>`;
@@ -156,7 +158,7 @@ if(computerScore > playerScore) {
 else if(playerScore > computerScore) {
   updateText.style.color = "blue";
 
-  if(playerScore > computerScore + 3) {
+  if(playerScore > computerScore + 2) {
     seeImage();
     bodyImg.style.backgroundImage = "url('success.jpg')";
     updateText.innerHTML = `<h1><strong>YOU ARE TRULY A GOD AT THIS GAME \n Reset to Play Again!</strong></h1>`;
